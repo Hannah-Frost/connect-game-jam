@@ -1,12 +1,20 @@
-from flask import Flask
+import pygame
+import os
 
-app = Flask(__name__)
+def main():
+    pygame.init()
+    pygame.display.set_caption("Hello B)")
 
+    screen = pygame.display.set_mode((640,480))
+    image = pygame.image.load(os.path.join("images", "background.png"))
+    screen.blit(image, (5,5))
+    pygame.display.flip()
 
-@app.route('/')
-def hello():
-    return 'Hello, World!'
+    running = True
 
-
-if __name__ == "__main__":
-	app.run()
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+if __name__ =="__main__":
+    main()
