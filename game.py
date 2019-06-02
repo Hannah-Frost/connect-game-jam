@@ -3,13 +3,20 @@ import os
 
 def main():
     pygame.init()
-    pygame.display.set_caption("Hello B)")
-    screen = pygame.display.set_mode((800,600))
 
-    menu_background = pygame.image.load(os.path.join("images", "background.png"))
     play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
     play_button = pygame.draw.rect(screen, (190, 190, 255), [500, 200, 121, 61])
     character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
+    pygame.mixer.pre_init(44100,16,2,4096)
+    pygame.display.set_caption("Connect!)")
+    screen = pygame.display.set_mode((800,600))
+    image = pygame.image.load(os.path.join("images", "background.png"))
+    screen.blit(image, (5,5))
+    pygame.display.flip()
+
+    pygame.mixer.music.load(os.path.join("src", "bgm.mp3"))
+    pygame.mixer.music.set_volume(0.5)
+    pygame.mixer.music.play(-1)
 
     running = True
     MENU = True
