@@ -42,6 +42,11 @@ def main():
             screen.blit(option_button_image, [320, 500])
 
             pygame.display.flip()
+            if event.type == pygame.MOUSEMOTION:
+                x, y = event.pos
+                if ( x in range(340,460)) and (y in range(430,485)):
+                    screen.blit(pick_jose_image, [121, 61])
+                    print("Hovering over play button!")
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 if play_button.collidepoint(x, y):
@@ -52,11 +57,6 @@ def main():
                 if option_button.collidepoint(x, y):
                     OPTION = True
                     MENU = False
-            if event.type == pygame.MOUSEMOTION:
-                x, y = event.pos
-                if ( x in range(340,430)) and (y in range(121,61)):
-                    screen.blit(pick_jose_image, [121, 61])
-                    print("Hovering over play button!")
         if SELECTION:
             screen.blit(character_selection, (0,0))
             if event.type == pygame.MOUSEMOTION:
