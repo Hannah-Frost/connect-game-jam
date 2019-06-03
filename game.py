@@ -10,6 +10,7 @@ def main():
     image = pygame.image.load(os.path.join("images", "background.png"))
     character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
     play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
+    back_button_image = pygame.image.load(os.path.join("images", "back_button.png")).convert()
     option_button_image = pygame.image.load(os.path.join("images", "option_button.png")).convert()
     pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
     pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
@@ -40,8 +41,6 @@ def main():
 
             option_button = pygame.draw.rect(screen, (190, 190, 255), [320, 500, 155, 61])
             screen.blit(option_button_image, [320, 500])
-
-            pygame.display.flip()
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(340,460)) and (y in range(430,485)):
@@ -57,6 +56,8 @@ def main():
                 if option_button.collidepoint(x, y):
                     OPTION = True
                     MENU = False
+            pygame.display.flip()
+
         if SELECTION:
             screen.blit(character_selection, (0,0))
             if event.type == pygame.MOUSEMOTION:
@@ -69,6 +70,7 @@ def main():
                 if ( x in range(200,400)) and (y in range(200,400)):
                     print("Clicked on jose!")
                     SELECTION = False
+                    JOSE = True
                     GAME = True
 
             if event.type == pygame.MOUSEMOTION:
@@ -81,6 +83,7 @@ def main():
                 if ( x in range(500,700)) and (y in range(200,400)):
                     print("Clicked on josette!")
                     SELECTION = False
+                    JOSETTE = True
                     GAME = True
 
             pygame.display.flip()
@@ -92,6 +95,14 @@ def main():
 
         if OPTION:
             screen.blit(option_background, (5,5))
+            back_button = pygame.draw.rect(screen, (190, 190, 255), [580, 500, 121, 61])
+            screen.blit(back_button_image, [580, 500])
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if back_button.collidepoint(x, y):
+                    OPTION = False
+                    SELECTION = False
+                    MENU = True
             pygame.display.flip()
 
 

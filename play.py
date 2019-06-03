@@ -9,14 +9,21 @@ circle_num = 20
 tick = 2
 speed = 5
 
+JOSE = True
+JOSETTE = False
+
 pygame.init()
 screen = screen = pygame.display.set_mode((800,600))
 play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
 portrait_jose = pygame.image.load(os.path.join("images", "play_jose.png"))
 portrait_josette = pygame.image.load(os.path.join("images", "play_josette.png"))
 screen.blit(play_background, (5,5))
-screen.blit(portrait_jose, [20, 20])
-screen.blit(portrait_josette, [580, 400])
+if JOSE:
+    screen.blit(portrait_jose, [20, 20])
+    screen.blit(portrait_josette, [580, 400])
+if JOSETTE:
+    screen.blit(portrait_josette, [20, 20])
+    screen.blit(portrait_jose, [580, 400])
 
 class circle():
     def __init__(self):
