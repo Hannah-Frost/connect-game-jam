@@ -5,7 +5,7 @@ def main():
     pygame.init()
 
     pygame.mixer.pre_init(44100,16,2,4096)
-    pygame.display.set_caption("Connect!)")
+    pygame.display.set_caption("RED WEBBING")
     screen = pygame.display.set_mode((800,600))
     image = pygame.image.load(os.path.join("images", "background.png"))
     character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
