@@ -30,14 +30,33 @@ def main():
     OPTION = False
 
     while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
         if MENU:
             screen.blit(menu_background, (5,5))
             play_button = pygame.draw.rect(screen, (190, 190, 255), [340, 430, 121, 61])
             screen.blit(play_button_image, [340, 430])
 
-            screen.blit(option_button_image, [340, 600])
+            option_button = pygame.draw.rect(screen, (190, 190, 255), [320, 500, 155, 61])
+            screen.blit(option_button_image, [320, 500])
 
             pygame.display.flip()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if play_button.collidepoint(x, y):
+                    SELECTION = True
+                    MENU = False
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if option_button.collidepoint(x, y):
+                    OPTION = True
+                    MENU = False
+            if event.type == pygame.MOUSEMOTION:
+                x, y = event.pos
+                if ( x in range(340,430)) and (y in range(121,61)):
+                    screen.blit(pick_jose_image, [121, 61])
+                    print("Hovering over play button!")
         if SELECTION:
             screen.blit(character_selection, (0,0))
             if event.type == pygame.MOUSEMOTION:
@@ -68,20 +87,12 @@ def main():
 
         if GAME:
             screen.blit(play_background, (5,5))
+            import play
             pygame.display.flip()
 
         if OPTION:
             screen.blit(option_background, (5,5))
             pygame.display.flip()
-
-        for event in pygame.event.get():
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                x, y = event.pos
-                if play_button.collidepoint(x, y):
-                    SELECTION = True
-                    MENU = False
-            if event.type == pygame.QUIT:
-                running = False
 
 
 
