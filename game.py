@@ -11,6 +11,8 @@ def main():
     image = pygame.image.load(os.path.join("images", "background.png"))
     play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
     play_button = pygame.draw.rect(screen, (190, 190, 255), [500, 200, 121, 61])
+    pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
+    pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
     menu_background = pygame.image.load(os.path.join("images", "background.png"))
     screen.blit(image, (5,5))
     pygame.display.flip()
@@ -27,11 +29,13 @@ def main():
     while running:
         if MENU:
             screen.blit(menu_background, (5,5))
-            play_button = pygame.draw.rect(screen, (190, 190, 255), [600, 40, 121, 61])
-            screen.blit(play_button_image, [600, 40])
+            play_button = pygame.draw.rect(screen, (190, 190, 255), [340, 430, 121, 61])
+            screen.blit(play_button_image, [340, 430])
             pygame.display.flip()
         if SELECTION:
             screen.blit(character_selection, (0,0))
+            screen.blit(pick_jose_image, [130, 230])
+            screen.blit(pick_josette_image, [480, 230])
             pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
