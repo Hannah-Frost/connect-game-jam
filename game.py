@@ -4,13 +4,12 @@ import os
 def main():
     pygame.init()
 
-    character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
     pygame.mixer.pre_init(44100,16,2,4096)
     pygame.display.set_caption("Connect!)")
     screen = pygame.display.set_mode((800,600))
     image = pygame.image.load(os.path.join("images", "background.png"))
+    character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
     play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
-    play_button = pygame.draw.rect(screen, (190, 190, 255), [500, 200, 121, 61])
     pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
     pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
     menu_background = pygame.image.load(os.path.join("images", "background.png"))
@@ -34,8 +33,15 @@ def main():
             pygame.display.flip()
         if SELECTION:
             screen.blit(character_selection, (0,0))
-            screen.blit(pick_jose_image, [130, 230])
-            screen.blit(pick_josette_image, [480, 230])
+            if event.type == pygame.MOUSEMOTION:
+                x, y = event.pos
+                if ( x in range(200,400)) and (y in range(200,400)):
+                    screen.blit(pick_jose_image, [130, 230])
+                    print("Hovering over jose!")
+                if ( x in range(500,700)) and (y in range(200,400)):
+                    screen.blit(pick_josette_image, [480, 230])
+                    print("Hovering over josette!")
+
             pygame.display.flip()
         for event in pygame.event.get():
             if event.type == pygame.MOUSEBUTTONDOWN:
