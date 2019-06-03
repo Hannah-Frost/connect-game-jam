@@ -13,6 +13,7 @@ def main():
     pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
     pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
     menu_background = pygame.image.load(os.path.join("images", "background.png"))
+    play_background = pygame.image.load(os.path.join("images", "background.png"))
     screen.blit(image, (5,5))
     pygame.display.flip()
 
@@ -51,6 +52,8 @@ def main():
                     MENU = False
             if event.type == pygame.QUIT:
                 running = False
+
+
 
 if __name__ =="__main__":
     main()
