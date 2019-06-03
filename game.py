@@ -10,10 +10,12 @@ def main():
     image = pygame.image.load(os.path.join("images", "background.png"))
     character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
     play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
+    option_button_image = pygame.image.load(os.path.join("images", "option_button.png")).convert()
     pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
     pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
     menu_background = pygame.image.load(os.path.join("images", "background.png"))
     play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
+    option_background = pygame.image.load(os.path.join("images", "optionbackground.png"))
     screen.blit(image, (5,5))
     pygame.display.flip()
 
@@ -25,12 +27,16 @@ def main():
     MENU = True
     SELECTION = False
     GAME = False
+    OPTION = False
 
     while running:
         if MENU:
             screen.blit(menu_background, (5,5))
             play_button = pygame.draw.rect(screen, (190, 190, 255), [340, 430, 121, 61])
             screen.blit(play_button_image, [340, 430])
+            
+            screen.blit(option_button_image, [340, 600])
+
             pygame.display.flip()
         if SELECTION:
             screen.blit(character_selection, (0,0))
@@ -53,7 +59,7 @@ def main():
                     print("Hovering over josette!")
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                if ( x in range(200,400)) and (y in range(200,400)):
+                if ( x in range(500,700)) and (y in range(200,400)):
                     print("Clicked on josette!")
                     SELECTION = False
                     GAME = True
@@ -62,6 +68,10 @@ def main():
 
         if GAME:
             screen.blit(play_background, (5,5))
+            pygame.display.flip()
+
+        if OPTION:
+            screen.blit(option_background, (5,5))
             pygame.display.flip()
 
         for event in pygame.event.get():
