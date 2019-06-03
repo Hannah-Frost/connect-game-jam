@@ -11,11 +11,13 @@ speed = 5
 
 pygame.init()
 screen = screen = pygame.display.set_mode((800,600))
+play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
+screen.blit(play_background, (5,5))
 
 class circle():
     def __init__(self):
-        self.x = random.randint(0, width)
-        self.y = random.randint(0, height)
+        self.x = random.randint(100, 700)
+        self.y = random.randint(120, 420)
         self.r = 5
 
     def new(self):
