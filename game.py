@@ -35,7 +35,7 @@ def main():
     OPTION = False
 
     spiderX= 800;
-    optionX= -100;
+    optionX= -195;
     dropdown1Y = -100;
     dropdown2Y = -100;
     dropdown3Y = -100;
@@ -67,7 +67,7 @@ def main():
                     pygame.display.update()
                     fpsClock.tick(100)
                 if spiderX > 600:
-                    optionX += 5 ;
+                    optionX += 10 ;
                     screen.blit(option_button_image, [optionX, 20])
                     pygame.display.update()
                     fpsClock.tick(100)
