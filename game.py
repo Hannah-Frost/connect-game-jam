@@ -8,6 +8,8 @@ def main():
     pygame.display.set_caption("RED WEBBING")
     screen = pygame.display.set_mode((800,600))
     image = pygame.image.load(os.path.join("images", "background.png"))
+    spider_pop_up = pygame.image.load(os.path.join("images", "spider-pop.png"))
+    dropdown_spider = pygame.image.load(os.path.join("images", "dropdown_spider.png"))
     character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
     play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
     back_button_image = pygame.image.load(os.path.join("images", "back_button.png")).convert()
@@ -17,34 +19,62 @@ def main():
     menu_background = pygame.image.load(os.path.join("images", "background.png"))
     play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
     option_background = pygame.image.load(os.path.join("images", "optionbackground.png"))
-    screen.blit(image, (5,5))
+    screen.blit(menu_background, (0,0))
     pygame.display.flip()
 
     pygame.mixer.music.load(os.path.join("src", "bgm.mp3"))
     pygame.mixer.music.set_volume(0.5)
     pygame.mixer.music.play(-1)
 
+    fpsClock = pygame.time.Clock()
     running = True
     MENU = True
     SELECTION = False
     GAME = False
     OPTION = False
 
+    spiderX= 800;
+    dropdown1Y = -100;
+    dropdown2Y = -100;
+    dropdown3Y = -100;
+
     while running:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
         if MENU:
-            screen.blit(menu_background, (5,5))
-            play_button = pygame.draw.rect(screen, (190, 190, 255), [340, 430, 121, 61])
-            screen.blit(play_button_image, [340, 430])
+            if spiderX > -10:
+                # screen.blit(menu_background, (0,0))
+                spiderX -= 10 ;
+                screen.blit(spider_pop_up , (spiderX, -100) )
+                pygame.display.update()
+                fpsClock.tick(100)
+                if spiderX < 200:
+                    dropdown1Y += 10 ;
+                    screen.blit(dropdown_spider , (620, dropdown1Y) )
+                    pygame.display.update()
+                    fpsClock.tick(100)
+                if spiderX < 320:
+                    dropdown2Y += 10 ;
+                    screen.blit(dropdown_spider , (680, dropdown2Y) )
+                    pygame.display.update()
+                    fpsClock.tick(100)
+                if spiderX > 100:
+                    dropdown3Y += 10 ;
+                    screen.blit(dropdown_spider , (130, dropdown3Y) )
+                    pygame.display.update()
+                    fpsClock.tick(100)
+            else:
+                # screen.blit(menu_background, (0,0))
+                play_button = pygame.draw.rect(screen, (190, 190, 255), [330, 460, 121, 61])
+                screen.blit(play_button_image, [330, 460])
 
-            option_button = pygame.draw.rect(screen, (190, 190, 255), [320, 500, 155, 61])
-            screen.blit(option_button_image, [320, 500])
+                option_button = pygame.draw.rect(screen, (190, 190, 255), [5, 20, 155, 61])
+                screen.blit(option_button_image, [5, 20])
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(340,460)) and (y in range(430,485)):
-                    screen.blit(pick_jose_image, [121, 61])
+                    screen.blit(spider_pop_up, [121, 61])
                     print("Hovering over play button!")
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
