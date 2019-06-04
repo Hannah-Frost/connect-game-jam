@@ -74,8 +74,8 @@ def main():
                 screen.blit(option_button_image, [5, 20])
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
-                if ( x in range(340,460)) and (y in range(430,485)):
-                    screen.blit(spider_pop_up, [121, 61])
+                if ( x in range(330,470)) and (y in range(460,520)):
+                    screen.blit(spider_pop_up, [200, 400])
                     print("Hovering over play button!")
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
