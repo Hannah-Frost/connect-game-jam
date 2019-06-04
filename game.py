@@ -7,7 +7,7 @@ def main():
     pygame.mixer.pre_init(44100,16,2,4096)
     pygame.display.set_caption("RED WEBBING")
     screen = pygame.display.set_mode((800,600))
-    image = pygame.image.load(os.path.join("images", "background.png"))
+    image = pygame.image.load(os.path.join("images", "menu_background.png"))
     spider_pop_up = pygame.image.load(os.path.join("images", "spider-pop.png"))
     dropdown_spider = pygame.image.load(os.path.join("images", "dropdown_spider.png"))
     character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
@@ -16,10 +16,11 @@ def main():
     option_button_image = pygame.image.load(os.path.join("images", "option_button.png")).convert()
     pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
     pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
-    menu_background = pygame.image.load(os.path.join("images", "background.png"))
+    blank_background = pygame.image.load(os.path.join("images", "blank_background.png"))
+    menu_background = pygame.image.load(os.path.join("images", "menu_background.png"))
     play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
     option_background = pygame.image.load(os.path.join("images", "optionbackground.png"))
-    screen.blit(menu_background, (0,0))
+    screen.blit(blank_background, (0,0))
     pygame.display.flip()
 
     pygame.mixer.music.load(os.path.join("src", "bgm.mp3"))
@@ -65,7 +66,7 @@ def main():
                     pygame.display.update()
                     fpsClock.tick(100)
             else:
-                # screen.blit(menu_background, (0,0))
+                screen.blit(menu_background, (0,0))
                 play_button = pygame.draw.rect(screen, (190, 190, 255), [330, 460, 121, 61])
                 screen.blit(play_button_image, [330, 460])
 
