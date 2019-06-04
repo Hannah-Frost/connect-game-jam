@@ -35,6 +35,7 @@ def main():
     OPTION = False
 
     spiderX= 800;
+    optionX= -100;
     dropdown1Y = -100;
     dropdown2Y = -100;
     dropdown3Y = -100;
@@ -61,8 +62,13 @@ def main():
                     pygame.display.update()
                     fpsClock.tick(100)
                 if spiderX > 100:
-                    dropdown3Y += 10 ;
+                    dropdown3Y += 20 ;
                     screen.blit(dropdown_spider , (130, dropdown3Y) )
+                    pygame.display.update()
+                    fpsClock.tick(100)
+                if spiderX > 600:
+                    optionX += 5 ;
+                    screen.blit(option_button_image, [optionX, 20])
                     pygame.display.update()
                     fpsClock.tick(100)
             else:
@@ -70,8 +76,8 @@ def main():
                 play_button = pygame.draw.rect(screen, (190, 190, 255), [330, 460, 121, 61])
                 screen.blit(play_button_image, [330, 460])
 
-                option_button = pygame.draw.rect(screen, (190, 190, 255), [5, 20, 155, 61])
-                screen.blit(option_button_image, [5, 20])
+                option_button = pygame.draw.rect(screen, (190, 190, 255), [-5, 20, 155, 61])
+                screen.blit(option_button_image, [-5, 20])
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(330,470)) and (y in range(460,520)):
