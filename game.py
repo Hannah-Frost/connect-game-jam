@@ -7,19 +7,25 @@ def main():
     pygame.mixer.pre_init(44100,16,2,4096)
     pygame.display.set_caption("RED WEBBING")
     screen = pygame.display.set_mode((800,600))
+
     image = pygame.image.load(os.path.join("images", "menu_background.png"))
-    spider_pop_up = pygame.image.load(os.path.join("images", "spider-pop.png"))
-    dropdown_spider = pygame.image.load(os.path.join("images", "dropdown_spider.png"))
     character_selection = pygame.image.load(os.path.join("images", "character_selection.png"))
-    play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
-    back_button_image = pygame.image.load(os.path.join("images", "back_button.png")).convert()
-    option_button_image = pygame.image.load(os.path.join("images", "option_button.png")).convert()
-    pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
-    pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
     blank_background = pygame.image.load(os.path.join("images", "blank_background.png"))
     menu_background = pygame.image.load(os.path.join("images", "menu_background.png"))
     play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
     option_background = pygame.image.load(os.path.join("images", "optionbackground.png"))
+
+    spider_pop_up = pygame.image.load(os.path.join("images", "spider-pop.png"))
+    dropdown_spider = pygame.image.load(os.path.join("images", "dropdown_spider.png"))
+
+    play_button_image = pygame.image.load(os.path.join("images", "basic_button.png")).convert()
+    option_button_image = pygame.image.load(os.path.join("images", "option_button.png")).convert()
+    back_button_image = pygame.image.load(os.path.join("images", "back_button.png")).convert()
+
+    pick_jose_image = pygame.image.load(os.path.join("images", "character_jose.png")).convert()
+    pick_josette_image = pygame.image.load(os.path.join("images", "character_josette.png")).convert()
+
+
     screen.blit(blank_background, (0,0))
     pygame.display.flip()
 
@@ -46,7 +52,6 @@ def main():
                 running = False
         if MENU:
             if spiderX > -10:
-                # screen.blit(menu_background, (0,0))
                 spiderX -= 10 ;
                 screen.blit(spider_pop_up , (spiderX, -100) )
                 pygame.display.update()
