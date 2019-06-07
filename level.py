@@ -7,6 +7,10 @@ player2 = False
 bcircle1_selected = False
 bcircle2_selected = False
 bcircle3_selected = False
+
+rcircle1_selected = False
+rcircle2_selected = False
+
 show_next_button = False
 
 def line(coords1, coords2):
@@ -19,6 +23,7 @@ pygame.init()
 screen = screen = pygame.display.set_mode((800,600))
 play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
 next_button_image = pygame.image.load(os.path.join("images", "next_button.png"))
+two_circles_notice = pygame.image.load(os.path.join("images", "two_circles_notice.png"))
 
 running = True
 
@@ -29,7 +34,8 @@ while running:
     bcircle2 = pygame.draw.circle(screen, (0,127,255), (300, 300), 6, 0)
     bcircle3 = pygame.draw.circle(screen, (0,127,255), (550, 450), 6, 0)
 
-    pygame.draw.circle(screen, (255,69,0), (450, 250), 6, 0)
+    rcircle1 = pygame.draw.circle(screen, (255,69,0), (450, 250), 6, 0)
+    rcircle2 = pygame.draw.circle(screen, (255,69,0), (150, 300), 6, 0)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -67,7 +73,7 @@ while running:
                     if x == True:
                         selected += 1
                 if selected > 2:
-                    show_next_button = False
+                    screen.blit(two_circles_notice, [500, 100])
                 if selected == 2:
                     show_next_button = True
                 else:
@@ -80,7 +86,7 @@ while running:
                     if x == True:
                         selected += 1
                 if selected > 2:
-                    show_next_button = False
+                    screen.blit(two_circles_notice, [500, 100])
                 if selected == 2:
                     show_next_button = True
                 else:
@@ -93,11 +99,56 @@ while running:
                     if x == True:
                         selected += 1
                 if selected > 2:
-                    show_next_button = False
+                    screen.blit(two_circles_notice, [500, 100])
                 if selected == 2:
                     show_next_button = True
                 else:
                     show_next_button = False
+
+        if player2:
+            if event.type == pygame.MOUSEMOTION:
+                x, y = event.pos
+                if ( x in range(450,250)) and (y in range(450,250)):
+                    pygame.draw.circle(screen, (248,248,255), (450, 250), 7, 1)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if rcircle1.collidepoint(x, y):
+                    rcircle1_selected = not rcircle1_selected
+            if event.type == pygame.MOUSEMOTION:
+                x, y = event.pos
+                if ( x in range(150,300)) and (y in range(150,300)):
+                    pygame.draw.circle(screen, (248,248,255), (150, 300), 7, 1)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if rcircle2.collidepoint(x, y):
+                    rcircle2_selected = not rcircle2_selected
+            if rcircle1_selected:
+                pygame.draw.circle(screen, (248,248,255), (450, 250), 8, 3)
+                selected = 0
+                circles = [rcircle1_selected, rcircle2_selected]
+                for x in circles:
+                    if x == True:
+                        selected += 1
+                if selected > 2:
+                    screen.blit(two_circles_notice, [500, 100])
+                if selected == 2:
+                    show_next_button = True
+                else:
+                    show_next_button = False
+            if rcircle2_selected:
+                pygame.draw.circle(screen, (248,248,255), (150, 300), 8, 3)
+                selected = 0
+                circles = [rcircle1_selected, rcircle2_selected]
+                for x in circles:
+                    if x == True:
+                        selected += 1
+                if selected > 2:
+                    screen.blit(two_circles_notice, [500, 100])
+                if selected == 2:
+                    show_next_button = True
+                else:
+                    show_next_button = False
+
         if show_next_button:
             next_button = pygame.draw.rect(screen, (190, 190, 255), [550, 105, 120, 30])
             screen.blit(next_button_image, [550, 105])
@@ -111,6 +162,10 @@ while running:
                     bcircle1_selected = False
                     bcircle2_selected = False
                     bbcircle3_selected = False
+
+                    rcircle1_selected = False
+                    rcircle2_selected = False
+
                     player1 = not player1
                     player2 = not player2
 
