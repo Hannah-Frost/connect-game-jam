@@ -24,6 +24,8 @@ screen = screen = pygame.display.set_mode((800,600))
 play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
 next_button_image = pygame.image.load(os.path.join("images", "next_button.png"))
 two_circles_notice = pygame.image.load(os.path.join("images", "two_circles_notice.png"))
+player_1_turn = pygame.image.load(os.path.join("images", "player_1_turn.png"))
+player_2_turn = pygame.image.load(os.path.join("images", "player_2_turn.png"))
 
 running = True
 
@@ -41,6 +43,7 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if player1:
+            screen.blit(player_1_turn, [20, 20])
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(195,211)) and (y in range(195,211)):
@@ -106,6 +109,7 @@ while running:
                     show_next_button = False
 
         if player2:
+            screen.blit(player_2_turn, [20, 20])
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(450,250)) and (y in range(450,250)):
