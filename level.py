@@ -7,20 +7,7 @@ player2 = False
 circle1_selected = False
 circle2_selected = False
 circle3_selected = False
-submit_button = False
-
-def circles_selected():
-    selected = 0
-    circles = [circle1_selected, circle2_selected, circle3_selected]
-    for x in circles:
-        if x == True:
-            selected += 1
-    if selected == 2:
-        submit_button = True
-    else:
-        submit_button = False
-    print(circles)
-    print(selected)
+show_next_button = False
 
 def line(coords1, coords2):
     if player1:
@@ -31,6 +18,7 @@ def line(coords1, coords2):
 pygame.init()
 screen = screen = pygame.display.set_mode((800,600))
 play_background = pygame.image.load(os.path.join("images", "playbackground.png"))
+next_button_image = pygame.image.load(os.path.join("images", "next_button.png"))
 
 running = True
 
@@ -73,12 +61,57 @@ while running:
                     circle3_selected = not circle3_selected
             if circle1_selected:
                 pygame.draw.circle(screen, (248,248,255), (200, 200), 8, 3)
-                circles_selected()
+                selected = 0
+                circles = [circle1_selected, circle2_selected, circle3_selected]
+                for x in circles:
+                    if x == True:
+                        selected += 1
+                if selected > 2:
+                    show_next_button = False
+                if selected == 2:
+                    show_next_button = True
+                else:
+                    show_next_button = False
             if circle2_selected:
                 pygame.draw.circle(screen, (248,248,255), (300, 300), 8, 3)
-                circles_selected()
+                selected = 0
+                circles = [circle1_selected, circle2_selected, circle3_selected]
+                for x in circles:
+                    if x == True:
+                        selected += 1
+                if selected > 2:
+                    show_next_button = False
+                if selected == 2:
+                    show_next_button = True
+                else:
+                    show_next_button = False
             if circle3_selected:
                 pygame.draw.circle(screen, (248,248,255), (550, 450), 8, 3)
-                circles_selected()
+                selected = 0
+                circles = [circle1_selected, circle2_selected, circle3_selected]
+                for x in circles:
+                    if x == True:
+                        selected += 1
+                if selected > 2:
+                    show_next_button = False
+                if selected == 2:
+                    show_next_button = True
+                else:
+                    show_next_button = False
+        if show_next_button:
+            next_button = pygame.draw.rect(screen, (190, 190, 255), [550, 105, 120, 30])
+            screen.blit(next_button_image, [550, 105])
+            if event.type == pygame.MOUSEMOTION:
+                x, y = event.pos
+                if ( x in range(550,105)) and (y in range(550,105)):
+                    pygame.draw.rect(screen, (248,248,255), [550, 105, 120, 30])
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if next_button.collidepoint(x, y):
+                    circle1_selected = False
+                    circle2_selected = False
+                    circle3_selected = False
+                    player1 = not player1
+                    player2 = not player2
 
         pygame.display.flip()
