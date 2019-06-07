@@ -4,9 +4,9 @@ import os
 player1 = True
 player2 = False
 
-circle1_selected = False
-circle2_selected = False
-circle3_selected = False
+bcircle1_selected = False
+bcircle2_selected = False
+bcircle3_selected = False
 show_next_button = False
 
 def line(coords1, coords2):
@@ -25,9 +25,9 @@ running = True
 while running:
     screen.blit(play_background, (0,0))
 
-    circle1 = pygame.draw.circle(screen, (0,127,255), (200, 200), 6, 0)
-    circle2 = pygame.draw.circle(screen, (0,127,255), (300, 300), 6, 0)
-    circle3 = pygame.draw.circle(screen, (0,127,255), (550, 450), 6, 0)
+    bcircle1 = pygame.draw.circle(screen, (0,127,255), (200, 200), 6, 0)
+    bcircle2 = pygame.draw.circle(screen, (0,127,255), (300, 300), 6, 0)
+    bcircle3 = pygame.draw.circle(screen, (0,127,255), (550, 450), 6, 0)
 
     pygame.draw.circle(screen, (255,69,0), (450, 250), 6, 0)
 
@@ -41,28 +41,28 @@ while running:
                     pygame.draw.circle(screen, (248,248,255), (200, 200), 7, 1)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                if circle1.collidepoint(x, y):
-                    circle1_selected = not circle1_selected
+                if bcircle1.collidepoint(x, y):
+                    bcircle1_selected = not bcircle1_selected
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(295,311)) and (y in range(295,311)):
                     pygame.draw.circle(screen, (248,248,255), (300, 300), 7, 1)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                if circle2.collidepoint(x, y):
-                    circle2_selected = not circle2_selected
+                if bcircle2.collidepoint(x, y):
+                    bcircle2_selected = not bcircle2_selected
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(545,511)) and (y in range(445,461)):
                     pygame.draw.circle(screen, (248,248,255), (550, 450), 7, 1)
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
-                if circle3.collidepoint(x, y):
-                    circle3_selected = not circle3_selected
-            if circle1_selected:
+                if bcircle3.collidepoint(x, y):
+                    bcircle3_selected = not bcircle3_selected
+            if bcircle1_selected:
                 pygame.draw.circle(screen, (248,248,255), (200, 200), 8, 3)
                 selected = 0
-                circles = [circle1_selected, circle2_selected, circle3_selected]
+                circles = [bcircle1_selected, bcircle2_selected, bcircle3_selected]
                 for x in circles:
                     if x == True:
                         selected += 1
@@ -72,10 +72,10 @@ while running:
                     show_next_button = True
                 else:
                     show_next_button = False
-            if circle2_selected:
+            if bcircle2_selected:
                 pygame.draw.circle(screen, (248,248,255), (300, 300), 8, 3)
                 selected = 0
-                circles = [circle1_selected, circle2_selected, circle3_selected]
+                circles = [bcircle1_selected, bcircle2_selected, bcircle3_selected]
                 for x in circles:
                     if x == True:
                         selected += 1
@@ -85,10 +85,10 @@ while running:
                     show_next_button = True
                 else:
                     show_next_button = False
-            if circle3_selected:
+            if bcircle3_selected:
                 pygame.draw.circle(screen, (248,248,255), (550, 450), 8, 3)
                 selected = 0
-                circles = [circle1_selected, circle2_selected, circle3_selected]
+                circles = [bcircle1_selected, bcircle2_selected, bcircle3_selected]
                 for x in circles:
                     if x == True:
                         selected += 1
@@ -108,9 +108,9 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 if next_button.collidepoint(x, y):
-                    circle1_selected = False
-                    circle2_selected = False
-                    circle3_selected = False
+                    bcircle1_selected = False
+                    bcircle2_selected = False
+                    bbcircle3_selected = False
                     player1 = not player1
                     player2 = not player2
 
