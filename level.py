@@ -13,11 +13,11 @@ rcircle2_selected = False
 
 show_next_button = False
 
-def line(coords1, coords2):
-    if player1:
-        pygame.draw.line(screen, (0,127,255), (coords1), (coords2), 4)
-    if player2:
-        pygame.draw.line(screen, (255,69,0), (coords1), (coords2), 4)
+coords1 = False
+coords2 = False
+
+blue_lines = []
+red_lines = []
 
 pygame.init()
 screen = screen = pygame.display.set_mode((800,600))
@@ -38,6 +38,11 @@ while running:
 
     rcircle1 = pygame.draw.circle(screen, (255,69,0), (450, 250), 6, 0)
     rcircle2 = pygame.draw.circle(screen, (255,69,0), (150, 300), 6, 0)
+    # for x in blue_lines:
+    #     pygame.draw.line(screen, (0,127,255), x, 4)
+    #
+    # for x in red_lines:
+    #     pygame.draw.line(screen, (255,69,0), x, 4)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -52,6 +57,11 @@ while running:
                 x, y = event.pos
                 if bcircle1.collidepoint(x, y):
                     bcircle1_selected = not bcircle1_selected
+                    if coords1 == False:
+                        coords1 = (200, 200)
+                    else:
+                        if coords2 == False:
+                            coords2 = (200, 200)
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(295,311)) and (y in range(295,311)):
@@ -60,6 +70,11 @@ while running:
                 x, y = event.pos
                 if bcircle2.collidepoint(x, y):
                     bcircle2_selected = not bcircle2_selected
+                    if coords1 == False:
+                        coords1 = (300, 300)
+                    else:
+                        if coords2 == False:
+                            coords2 = (300, 300)
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(545,511)) and (y in range(445,461)):
@@ -68,6 +83,11 @@ while running:
                 x, y = event.pos
                 if bcircle3.collidepoint(x, y):
                     bcircle3_selected = not bcircle3_selected
+                    if coords1 == False:
+                        coords1 = (550, 450)
+                    else:
+                        if coords2 == False:
+                            coords2 = (550, 450)
             if bcircle1_selected:
                 pygame.draw.circle(screen, (248,248,255), (200, 200), 8, 3)
                 selected = 0
@@ -118,6 +138,11 @@ while running:
                 x, y = event.pos
                 if rcircle1.collidepoint(x, y):
                     rcircle1_selected = not rcircle1_selected
+                    if coords1 == False:
+                        coords1 = (450, 250)
+                    else:
+                        if coords2 == False:
+                            coords2 = (450, 250)
             if event.type == pygame.MOUSEMOTION:
                 x, y = event.pos
                 if ( x in range(150,300)) and (y in range(150,300)):
@@ -126,6 +151,11 @@ while running:
                 x, y = event.pos
                 if rcircle2.collidepoint(x, y):
                     rcircle2_selected = not rcircle2_selected
+                    if coords1 == False:
+                        coords1 = (150, 300)
+                    else:
+                        if coords2 == False:
+                            coords2 = (150, 300)
             if rcircle1_selected:
                 pygame.draw.circle(screen, (248,248,255), (450, 250), 8, 3)
                 selected = 0
@@ -163,6 +193,11 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = event.pos
                 if next_button.collidepoint(x, y):
+                    if coords1 != False and coords2 != False:
+                        if player1:
+                            blue_lines.append(pygame.draw.line(screen, (0,127,255), (coords1), (coords2), 4))
+                        if player2:
+                            red_lines.append(pygame.draw.line(screen, (255,69,0), (coords1), (coords2), 4))
                     bcircle1_selected = False
                     bcircle2_selected = False
                     bbcircle3_selected = False
@@ -172,5 +207,9 @@ while running:
 
                     player1 = not player1
                     player2 = not player2
+
+                    coords1 = False
+                    coords2 = False
+
 
         pygame.display.flip()
