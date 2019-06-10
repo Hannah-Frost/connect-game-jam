@@ -10,6 +10,7 @@ bcircle3_selected = False
 
 rcircle1_selected = False
 rcircle2_selected = False
+rcircle3_selected = False
 
 show_next_button = False
 
@@ -40,8 +41,7 @@ while running:
 
     rcircle1 = pygame.draw.circle(screen, (255,69,0), (450, 250), 6, 0)
     rcircle2 = pygame.draw.circle(screen, (255,69,0), (150, 300), 6, 0)
-
-    print(blue_lines)
+    rcircle3 = pygame.draw.circle(screen, (255,69,0), (420, 440), 6, 0)
 
     i = 0
     while i < len(blue_lines):
@@ -50,7 +50,7 @@ while running:
 
     i = 0
     while i < len(red_lines):
-        pygame.draw.line(screen, (0,127,255), (red_lines[i][0]), (red_lines[i][1]), 4)
+        pygame.draw.line(screen, (255,69,0), (red_lines[i][0]), (red_lines[i][1]), 4)
         i += 1
 
     for event in pygame.event.get():
@@ -165,10 +165,23 @@ while running:
                     else:
                         if coords2 == False:
                             coords2 = (150, 300)
+            if event.type == pygame.MOUSEMOTION:
+                x, y = event.pos
+                if ( x in range(420, 440)) and (y in range(420, 440)):
+                    pygame.draw.circle(screen, (248,248,255), (420, 440), 7, 1)
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                x, y = event.pos
+                if rcircle3.collidepoint(x, y):
+                    rcircle3_selected = not rcircle3_selected
+                    if coords1 == False:
+                        coords1 = (420, 440)
+                    else:
+                        if coords2 == False:
+                            coords2 = (420, 440)
             if rcircle1_selected:
                 pygame.draw.circle(screen, (248,248,255), (450, 250), 8, 3)
                 selected = 0
-                circles = [rcircle1_selected, rcircle2_selected]
+                circles = [rcircle1_selected, rcircle2_selected, rcircle3_selected]
                 for x in circles:
                     if x == True:
                         selected += 1
@@ -181,7 +194,20 @@ while running:
             if rcircle2_selected:
                 pygame.draw.circle(screen, (248,248,255), (150, 300), 8, 3)
                 selected = 0
-                circles = [rcircle1_selected, rcircle2_selected]
+                circles = [rcircle1_selected, rcircle2_selected, rcircle3_selected]
+                for x in circles:
+                    if x == True:
+                        selected += 1
+                if selected > 2:
+                    screen.blit(two_circles_notice, [500, 100])
+                if selected == 2:
+                    show_next_button = True
+                else:
+                    show_next_button = False
+            if rcircle3_selected:
+                pygame.draw.circle(screen, (248,248,255), (420, 440), 8, 3)
+                selected = 0
+                circles = [rcircle1_selected, rcircle2_selected, rcircle3_selected]
                 for x in circles:
                     if x == True:
                         selected += 1
@@ -205,18 +231,17 @@ while running:
                     if coords1 != False and coords2 != False:
                         if player1:
                             blue_lines.append([coords1, coords2])
-                            # blue_lines1.append(coords1)
-                            # blue_lines2.append(coords2)
+
                         if player2:
                             red_lines.append([coords1, coords2])
-                            # red_lines1.append(coords1)
-                            # red_lines2.append(coords2)
+
                     bcircle1_selected = False
                     bcircle2_selected = False
                     bcircle3_selected = False
 
                     rcircle1_selected = False
                     rcircle2_selected = False
+                    rcircle3_selected = False
 
                     player1 = not player1
                     player2 = not player2
