@@ -16,10 +16,10 @@ show_next_button = False
 coords1 = False
 coords2 = False
 
-blue_lines1 = []
-blue_lines2 = []
-red_lines1 = []
-red_lines2 = []
+blue_lines = []
+red_lines = []
+
+turn = 1
 
 pygame.init()
 screen = screen = pygame.display.set_mode((800,600))
@@ -41,13 +41,17 @@ while running:
     rcircle1 = pygame.draw.circle(screen, (255,69,0), (450, 250), 6, 0)
     rcircle2 = pygame.draw.circle(screen, (255,69,0), (150, 300), 6, 0)
 
-    for x in blue_lines1:
-        for y in blue_lines2:
-            pygame.draw.line(screen, (0,127,255), (x), (y), 4)
+    print(blue_lines)
 
-    for x in red_lines1:
-        for y in red_lines2:
-            pygame.draw.line(screen, (255,69,0), (x), (y), 4)
+    i = 0
+    while i < len(blue_lines):
+        pygame.draw.line(screen, (0,127,255), (blue_lines[i][0]), (blue_lines[i][1]), 4)
+        i += 1
+
+    i = 0
+    while i < len(red_lines):
+        pygame.draw.line(screen, (0,127,255), (red_lines[i][0]), (red_lines[i][1]), 4)
+        i += 1
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -200,16 +204,16 @@ while running:
                 if next_button.collidepoint(x, y):
                     if coords1 != False and coords2 != False:
                         if player1:
-                            # blue_lines.append(pygame.draw.line(screen, (0,127,255), (coords1), (coords2), 4))
-                            blue_lines1.append(coords1)
-                            blue_lines2.append(coords2)
+                            blue_lines.append([coords1, coords2])
+                            # blue_lines1.append(coords1)
+                            # blue_lines2.append(coords2)
                         if player2:
-                            # red_lines.append(pygame.draw.line(screen, (255,69,0), (coords1), (coords2), 4))
-                            red_lines1.append(coords1)
-                            red_lines2.append(coords2)
+                            red_lines.append([coords1, coords2])
+                            # red_lines1.append(coords1)
+                            # red_lines2.append(coords2)
                     bcircle1_selected = False
                     bcircle2_selected = False
-                    bbcircle3_selected = False
+                    bcircle3_selected = False
 
                     rcircle1_selected = False
                     rcircle2_selected = False
@@ -219,6 +223,8 @@ while running:
 
                     coords1 = False
                     coords2 = False
+
+                    turn += 1
 
 
         pygame.display.flip()
