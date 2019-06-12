@@ -32,10 +32,18 @@ two_circles_notice = pygame.image.load(os.path.join("images", "two_circles_notic
 player_1_turn = pygame.image.load(os.path.join("images", "player_1_turn.png"))
 player_2_turn = pygame.image.load(os.path.join("images", "player_2_turn.png"))
 
+displayFont = pygame.font.SysFont("Verdana", 30)
+
 running = True
 
 while running:
     screen.blit(play_background, (0,0))
+    score_text = displayFont.render("Score:", 1, (248,248,255))
+    blue_score = displayFont.render(f"{len(blue_lines)}", 1, (0,127,255))
+    red_score = displayFont.render(f"{len(red_lines)}", 1, (255,69,0))
+    screen.blit(score_text, (42, 80))
+    screen.blit(blue_score, (115, 80))
+    screen.blit(red_score, (145, 80))
 
     bcircle1 = pygame.draw.circle(screen, (0,127,255), (200, 200), 6, 0)
     bcircle2 = pygame.draw.circle(screen, (0,127,255), (300, 300), 6, 0)
